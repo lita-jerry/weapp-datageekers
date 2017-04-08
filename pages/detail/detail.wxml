@@ -1,0 +1,46 @@
+<!--detail.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="detail-main">
+  <view class="detail-post">
+    <view class="detail-post-header">
+      <view class="detail-post-title">{{ detail.title }}</view>
+    </view>
+    <view class="detail-post-meta">
+      <view class="detail-post-avatar">
+        <!--<image class="detail-post-avatar-img" mode="scaleToFill" src=" {{detail.post_stream.posts[0].avatar_template}}"></image>-->
+        <image class="detail-post-avatar-img" mode="scaleToFill" src="{{detail.post_stream.posts[0].avatar_template}}"></image>
+      </view>
+      <view class="detail-post-info">
+        <view class="detail-post-author-name">{{ detail.post_stream.posts[0].username }}</view>
+        <view class="detail-post-time">楼主 发表于{{ detail.post_stream.posts[0].created_at }}</view>
+      </view>
+    </view>
+    <view class="detail-post-content">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+    <view class="detail-post-comment">
+      <view class="detail-post-comment-title">评论</view>
+      <view class="detail-post-comment-list" wx:for="{{ replies }}" wx:for-index="idx" wx:for-item="i">
+        <view class="detail-post-comment-avatar">
+          <image class="detail-post-comment-avatar-img" mode="scaleToFill" src="{{ i.avatar_template }}"></image>
+        </view>
+        <view class="detail-post-comment-info">
+          <view class="detail-post-comment-author-name">{{ i.username }}</view>
+        </view>
+        <view class="detail-post-comment-time">{{idx + 1}}楼 发表于{{ i.created_at }}</view>
+        <block wx:for="{{ replyTemArray }}" wx:for-index="jdx" wx:for-item="j">
+          <block wx:if="{{j.length>0}}">          
+            <block wx:if="{{idx == jdx}}" class="detail-comment-content">
+              <view class="detail-post-comment-item">
+                <template is="wxParse" data="{{wxParseData:j}}"/>
+              </view>  
+            </block>
+          </block>
+        </block>        
+      </view>
+    </view>
+  </view>
+  <loading hidden="{{hidden}}">
+    加载中...
+  </loading>
+</view>

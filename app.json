@@ -1,0 +1,15 @@
+{
+  "pages":[ 
+    "pages/topics/topics",
+    "pages/detail/detail",
+    "pages/parseHtml/parseHtml"
+  ],  
+  "window":{
+    "backgroundTextStyle":"black",
+    "backgroundColor":"#fff",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "数据极客社区",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh":"true"
+  }
+}
